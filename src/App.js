@@ -7,6 +7,7 @@ class User extends React.Component{
   constructor(props){
     super(props);
     this.state = {
+      user: this.props.user,
       items: [{name: 'Soup', price: 200}, {name: 'Cake', price: 100}],
       cost: 0
     }
@@ -22,7 +23,7 @@ class User extends React.Component{
           }
           return response.json();
       }).then(function(data) {
-          self.setState({items: data});
+          self.setState({items: Object.values(JSON.parse(data))});
       }).catch(err => {
       console.log('Caught it!',err);
       })
@@ -39,7 +40,7 @@ class User extends React.Component{
 
   handleSubmit = (event) => {
     event.preventDefault();
-    var data = {cost: this.state.cost};
+    var data = {user: this.state.user, cost: this.state.cost};
     console.log(JSON.stringify(data));
     fetch("/bill", {
         method: 'POST',
@@ -121,7 +122,7 @@ class Admin extends React.Component{
           }
           return response.json();
       }).then(function(data) {
-          self.setState({items: data});
+          self.setState({items: Object.values(JSON.parse(data))});
       }).catch(err => {
       console.log('Caught it!',err);
       })
@@ -187,7 +188,7 @@ class Admin extends React.Component{
 
       <div className='Container'>
 
-        <h1 className='Heads'>Admin</h1>
+        <h1 className='Heads'>Welcome Admin</h1>
         <div className='Content'>
 
         <form onSubmit={this.handleSubmit}>

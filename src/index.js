@@ -9,15 +9,31 @@ import * as serviceWorker from './serviceWorker';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {isLoggedIn: 0};
+    this.state = {isLoggedIn: 0, user: '', pass: 'pass'};
   }
 
   handleAdmin = (event) =>{
-  	this.setState({isLoggedIn: 1});
+    event.preventDefault();
+    // eslint-disable-next-line
+    if(document.getElementsByName('password')[0].value==this.state.pass){
+  	 this.setState({isLoggedIn: 1});
+    }
+    else{
+      document.getElementsByName('invalid')[0].style.visibility = 'visible';
+    }
   }
 
   handleUser = (event) =>{
-  	this.setState({isLoggedIn: 2});
+    event.preventDefault();
+    // eslint-disable-next-line
+    if(document.getElementsByName('username')[0].value!==''){
+     this.setState({user: document.getElementsByName('username')[0].value});
+    this.setState({isLoggedIn: 2});
+    }
+    else{
+      document.getElementsByName('userinv')[0].style.visibility = 'visible';
+    }
+    
   }
 
   handleBack = (event) =>{
@@ -38,7 +54,7 @@ class App extends React.Component {
       return (
       	<div>
       	<input className='btn-lg btn btn-default' style={{display: 'inlineBlock'}} type='button' value='<' onClick={this.handleBack}></input>
-      	<User />
+      	<User user={this.state.user}/>
       	</div>
       	
       	);
@@ -46,19 +62,25 @@ class App extends React.Component {
     else{
     return (
     <div>
-    	<input className='btn-lg btn btn-default' style={{display: 'inlineBlock'}} type='button' value='<' onClick={this.handleBack}></input>
+    	<input className='btn-lg btn btn-default' style={{display: 'inlineBlock', visibility: 'hidden'}} type='button' value='<' onClick={this.handleBack}></input>
       <div className='Container'>
 
           <h1 className='Heads'>Login As</h1>
           <div className='Content'>
           <form>
+
           <div className='FormGroup'>
-          <input className='btn-lg btn btn-default Butn Select' type='submit' value='Admin' onClick={this.handleAdmin}></input>
+          <input className='Boxes' style={{margin: 10, width: 200, padding: 5}} name='username' placeholder='Name'></input>
+          <input className='btn-lg btn btn-default Butn Select' type='submit' value='User' onClick={this.handleUser}></input>
+          <span className='Subheads' name='userinv' style={{visibility: 'collapse'}}>Enter a username!</span>
           </div>
 
           <div className='FormGroup'>
-          <input className='btn-lg btn btn-default Butn Select' type='submit' value='User' onClick={this.handleUser}></input>
+          <input className='Boxes' style={{margin: 10, width: 200, padding: 5}} name='password' placeholder='Password'></input>
+          <input className='btn-lg btn btn-default Butn Select' type='submit' value='Admin' onClick={this.handleAdmin}></input>
+          <span className='Subheads' name='invalid' style={{visibility: 'collapse'}}>Invalid password!</span>
           </div>
+
           </form>       
               
           </div>
