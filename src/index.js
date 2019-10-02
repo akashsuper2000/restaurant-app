@@ -76,7 +76,7 @@ class App extends React.Component {
           </div>
 
           <div className='FormGroup'>
-          <input className='Boxes' style={{margin: 10, width: 200, padding: 5}} name='password' placeholder='Password'></input>
+          <input className='Boxes' style={{margin: 10, width: 200, padding: 5}} name='password' type='password' placeholder='Password'></input>
           <input className='btn-lg btn btn-default Butn Select' type='submit' value='Admin' onClick={this.handleAdmin}></input>
           <span className='Subheads' name='invalid' style={{visibility: 'collapse'}}>Invalid password!</span>
           </div>

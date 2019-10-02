@@ -15,8 +15,9 @@ class User extends React.Component{
 
   componentDidMount() {
       let self = this;
-      fetch('/items', {
-          method: 'POST'
+      fetch('https://us-central1-nodejs-workshop-210811.cloudfunctions.net/mysql-function/items', {
+          method: 'POST',
+          headers: {'Access-Control-Allow-Origin': '*'}
       }).then(function(response) {
           if (response.status >= 400) {
               throw new Error("Bad response from server");
@@ -42,9 +43,9 @@ class User extends React.Component{
     event.preventDefault();
     var data = {user: this.state.user, cost: this.state.cost};
     console.log(JSON.stringify(data));
-    fetch("/bill", {
+    fetch("https://us-central1-nodejs-workshop-210811.cloudfunctions.net/mysql-function-2/bill", {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
         body: JSON.stringify(data)
     }).then(function(response) {
         if (response.status >= 400) {
@@ -114,8 +115,9 @@ class Admin extends React.Component{
   componentDidMount() {
     document.getElementById("addbox").style.display = "none";
       let self = this;
-      fetch('/items', {
-          method: 'POST'
+      fetch('https://us-central1-nodejs-workshop-210811.cloudfunctions.net/mysql-function/items', {
+          method: 'POST',
+          headers: {'Access-Control-Allow-Origin': '*'}
       }).then(function(response) {
           if (response.status >= 400) {
               throw new Error("Bad response from server");
@@ -163,17 +165,18 @@ class Admin extends React.Component{
   handleSubmit = (event) => {
     event.preventDefault();
     console.log(JSON.stringify(this.state.items));
-    fetch("/update", {
+    fetch("https://us-central1-nodejs-workshop-210811.cloudfunctions.net/mysql-function-3/update", {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        mode: 'no-cors',
+        headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
         body: JSON.stringify(this.state.items)
     }).then(function(response) {
         if (response.status >= 400) {
           throw new Error("Bad response from server");
         }
-        return response.json();
+        //return response.json();
     }).then(function(data) {
-        console.log(data);
+        //console.log(data);
         // eslint-disable-next-line
         if(data == "success"){
         console.log('Success'); 

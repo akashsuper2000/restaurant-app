@@ -86,6 +86,8 @@ app.post('/bill',(req,res)=>{
 });
 
 
-app.listen(5000,()=>{
-  console.log("Port 5000");
-})
+// app.listen(5000,()=>{
+//   console.log("Port 5000");
+// })
+
+module.exports = app;
