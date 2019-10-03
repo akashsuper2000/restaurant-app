@@ -158,8 +158,33 @@ class Admin extends React.Component{
     return arr;
     }
 
-    removeByAttr(this.state.items, 'name', event.target.previousSibling.previousSibling.innerHTML);
+    removeByAttr(this.state.items, 'name', event.target.previousSibling.previousSibling.previousSibling.innerHTML);
     this.setState({items: this.state.items});
+  }
+
+  handleUpdate = (event) => {
+    event.preventDefault();
+    var thename = event.target.previousSibling.previousSibling.innerHTML;
+    var theprice = event.target.previousSibling.innerHTML;
+    var removeByAttr = function(arr, attr, value){
+    var i = arr.length;
+    while(i--){
+       if( arr[i] 
+           && arr[i].hasOwnProperty(attr) 
+           && (arguments.length > 2 && arr[i][attr] === value ) ){ 
+
+           arr.splice(i,1);
+
+       }
+    }
+    return arr;
+    }
+    removeByAttr(this.state.items, 'name', event.target.previousSibling.previousSibling.innerHTML);
+
+    document.getElementById("addbox").style.display = "block";
+    document.getElementsByName('newname')[0].value = thename;
+    document.getElementsByName('newprice')[0].value = theprice;
+
   }
 
   handleSubmit = (event) => {
@@ -200,6 +225,7 @@ class Admin extends React.Component{
           <div className='FormGroup' key={i}>
             <span className='Subheads' name='name'>{item.name}</span>
             <span className='Price' name='price'>{item.price}</span>
+            <input className='btn btn-lg btn-default' style={{margin: 10, width: 200, padding: 5}} type='button' value='* Update item' onClick={this.handleUpdate}></input>
             <input className='btn btn-lg btn-default' style={{margin: 10, width: 200, padding: 5}} type='button' value='- Remove item' onClick={this.handleRemove}></input>
           </div>
           )}
