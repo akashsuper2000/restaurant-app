@@ -70,13 +70,13 @@ class App extends React.Component {
           <form>
 
           <div className='FormGroup'>
-          <input className='Boxes' style={{margin: 10, width: 200, padding: 5}} name='username' placeholder='Name'></input>
+          <input className='Boxes' style={{margin: 10, width: 200, padding: 7, borderRadius: 3}} name='username' placeholder='Name'></input>
           <input className='btn-lg btn btn-default Butn Select' type='submit' value='User' onClick={this.handleUser}></input>
           <span className='Subheads' name='userinv' style={{visibility: 'collapse'}}>Enter a username!</span>
           </div>
 
           <div className='FormGroup'>
-          <input className='Boxes' style={{margin: 10, width: 200, padding: 5}} name='password' type='password' placeholder='Password'></input>
+          <input className='Boxes' style={{margin: 10, width: 200, padding: 7, borderRadius: 3}} name='password' type='password' placeholder='Password'></input>
           <input className='btn-lg btn btn-default Butn Select' type='submit' value='Admin' onClick={this.handleAdmin}></input>
           <span className='Subheads' name='invalid' style={{visibility: 'collapse'}}>Invalid password!</span>
           </div>
